@@ -1,0 +1,12 @@
+.movie-search {
+  border-radius: 1px;
+  background: #fff;
+}
+
+.movie-search .btn {
+border-radius: 2px;
+border-color: #d3d3d3;
+background: #f8f8f8;
+width: 20%;
+margin-left: -1px;
+}
