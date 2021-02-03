@@ -19,7 +19,7 @@ class App extends React.Component {
       <div className="header"></div>
       <div className="list">
         <div>
-          <MovieList movielist={this.state.movies}/>
+          <MovieList movies={this.state.movies}/>
         </div>
       </div>
     </div>
