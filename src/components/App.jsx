@@ -14,7 +14,8 @@ class App extends React.Component {
       searchPartial: '',
       search: '',
       inputPartial: '',
-      input: ''
+      input: '',
+      watched: false,
     }
 
   }
@@ -66,15 +67,29 @@ class App extends React.Component {
     var inputEvent = this.state.inputPartial;
 
     this.setState({
-      movies: [...this.state.movies, {title: inputEvent}],
-      movieResults: [...this.state.movies, {title: inputEvent}],
+      movies: [...this.state.movies, {title: inputEvent, watched: false}], //this.state.watched}], initialize to not watched
+      movieResults: [...this.state.movies, {title: inputEvent, watched: false}],
       //input: inputEvent
     });
   }
 
+  //watch methods
+  watchToggle() {
+    this.setState({
+      watched: !this.state.watched,
+    });
+  }
 
 
-  render(){
+  render() {
+    //making the style conditional on our state lets us update it based on user interactions
+    var style = {
+      backgroundColor: this.state.watched ? 'green' : 'red'
+      //change inner text?
+    };
+
+
+
     return(
     <div>
       <div className="header"></div>
@@ -85,12 +100,20 @@ class App extends React.Component {
         <Search handleSearch={this.handleSearch.bind(this)} handleSubmit={this.handleSubmit.bind(this)} />
       </div>
       <div className="list">
+        <div className="button-bar">
+          <button className="watched">Watched</button>
+          <button className="to-watch">To Watch</button>
+       </div>
         <div>
-          <MovieList movieResults={this.state.movieResults} search={this.state.searchPartial}/>
+          <MovieList
+            movieResults={this.state.movieResults}
+            search={this.state.searchPartial}
+            watchToggle={this.watchToggle.bind(this)}
+            style={style}/>
         </div>
       </div>
     </div>
   )}
-}
+};
 
 export default App;

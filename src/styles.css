@@ -4,9 +4,22 @@
 }
 
 .movie-search .btn {
-border-radius: 2px;
-border-color: #d3d3d3;
-background: #f8f8f8;
-width: 20%;
-margin-left: -1px;
+  border-radius: 2px;
+  border-color: #d3d3d3;
+  background: #f8f8f8;
+  margin-left: -1px;
+}
+.movie-list {
+  height: 50%;
+  width: 70%;
+  border-style: solid;
+  border-radius: 20px;
+  border-color: black;
+  padding: 5px;
+  margin: 5px;
+}
+.movie-list-entry {
+  padding: 1px;
+  /* border-style: dashed;
+  border-color: blue; */
 }

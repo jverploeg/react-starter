@@ -5,7 +5,7 @@ import MovieListEntry from '../components/MovieListEntry.jsx';
 var MovieList = (props) => ( //passing in movielist={this.state.movies}
   <div className="movie-list">
     {props.movieResults.map((item, index)=>
-      <MovieListEntry movieResults={item} key={index} search={props.search}/>
+      <MovieListEntry movieResults={item} key={index} search={props.search} watchToggle={props.watchToggle} style={props.style}/>
     )}
   </div>
 );
