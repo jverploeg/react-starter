@@ -19,7 +19,11 @@
   margin: 5px;
 }
 .movie-list-entry {
+  /* display: inline-block; */
   padding: 1px;
   /* border-style: dashed;
   border-color: blue; */
+}
+.movie-list-entry-title {
+  margin: 10px;
 }

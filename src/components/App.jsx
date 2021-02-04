@@ -25,16 +25,9 @@ class App extends React.Component {
     this.setState({
       searchPartial: text
     });
-    // if(text === '') {
-    //   this.setState({
-    //     movies: movies
-    //   });
-    // } don't need
   }
   handleSubmit() {
     var searchQ = this.state.searchPartial;
-    //console.log(searchQ);
-    //console.log(event);
     this.setState({
       search: searchQ
     });
@@ -50,43 +43,52 @@ class App extends React.Component {
     }
     this.setState({
       movieResults: result
+      //movies: result
     });
   }
+
+
   //movie input methods
   handleInput(text) {
     this.setState({
       inputPartial: text
     });
-    // if(text === '') {
-    //   this.setState({
-    //     movies: movies
-    //   });
-    // }
   }
   handleMovieSubmit() {
     var inputEvent = this.state.inputPartial;
 
     this.setState({
-      movies: [...this.state.movies, {title: inputEvent, watched: false}], //this.state.watched}], initialize to not watched
-      movieResults: [...this.state.movies, {title: inputEvent, watched: false}],
-      //input: inputEvent
+      movies: [...this.state.movies, {title: inputEvent, watched: false, id: Date.now()}], //this.state.watched}], initialize to not watched
+      movieResults: [...this.state.movies, {title: inputEvent, watched: false, id: Date.now()}],//create
     });
   }
 
   //watch methods
-  watchToggle() {
+  watchToggle(id) {
+    console.log('id',id);
     this.setState({
-      watched: !this.state.watched,
+      movies: this.state.movies.map(movie => {
+        if(movie.id === id) {
+          console.log('changing');
+          return {
+            ...movie, //get all the movie properties
+            watched: !movie.watched,
+          };
+        } else {
+          console.log('not changing');
+          return movie;
+        }
+      })     //!this.state.watched,
     });
   }
 
 
   render() {
     //making the style conditional on our state lets us update it based on user interactions
-    var style = {
-      backgroundColor: this.state.watched ? 'green' : 'red'
-      //change inner text?
-    };
+    // var style = {
+    //   backgroundColor: this.state.watched ? 'green' : 'red'
+    //   //change inner text?
+    // };
 
 
 
@@ -106,10 +108,10 @@ class App extends React.Component {
        </div>
         <div>
           <MovieList
-            movieResults={this.state.movieResults}
+            movieResults={this.state.movies}
             search={this.state.searchPartial}
             watchToggle={this.watchToggle.bind(this)}
-            style={style}/>
+           />
         </div>
       </div>
     </div>
