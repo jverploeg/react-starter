@@ -8,6 +8,7 @@ var MovieList = (props) => ( //passing in movielist={this.state.movies}
       <MovieListEntry
       movies={item}
       key={index}
+      watchedStatus={props.watchedStatus}
       // search={props.search}
       // watchToggle={props.watchToggle}
       />

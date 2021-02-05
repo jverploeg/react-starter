@@ -11,7 +11,7 @@ class Search extends React.Component {
     super(props);
     this.state = {
       searchTerm: '',
-      watched: false,
+      //watched: false,
     }
     //bindings for created methods
     this.handleChange = this.handleChange.bind(this);

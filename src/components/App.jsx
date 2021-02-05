@@ -12,18 +12,117 @@ class App extends React.Component {
       movies: [], //movies,//our search result are currently overwriting our movie array...
       movieResults: [],
       searchPartial: '',
-      search: '',
-      inputPartial: '',
-      input: '',
-      watched: false,
+      //search: '',
+      //inputPartial: '',
+      //input: '',
+      //watched: false,
     }
     //bindings
     this.addMovie = this.addMovie.bind(this);
     this.searchMovie = this.searchMovie.bind(this);
 
+    this.watchedStatus = this.watchedStatus.bind(this);
+
     //initialize
     //this.searchMovie('');
   }
+
+  addMovie(movie) {
+    var newMovies = this.state.movies.slice(); //make a shallow copy of our movie array
+    newMovies.push(movie); //add returned movie from the AddMovie class
+    this.setState({
+      movies: newMovies, //this way we don't lose our original movie array when we add a movie
+    })
+  }
+  searchMovie(movieDisplay) {
+    //var displayMovies = this.state.movies.slice(); //make a shallow copy of our movie array
+    //do something
+    this.setState({
+      movieResults: movieDisplay,
+    })
+    console.log(movieDisplay);
+  }
+  //initializing the display before search...
+  display() {
+    if(this.state.movieResults.length === 0) {
+      return this.state.movies;
+    } else {
+      return this.state.movieResults;
+    }
+  }
+  watchedStatus(event) {
+    console.log(event);
+
+  }
+
+  render() {
+    return(
+    <div>
+      <div className="header"></div>
+      <div className="new-movie">
+        <AddMovie addMovie={this.addMovie} />
+      </div>
+      <div className="search">
+        <Search movies={this.state.movies} searchMovie={this.searchMovie}/>
+      </div>
+      <div className="list">
+        <div className="button-bar">
+          <button className="watched">Watched</button>
+          <button className="to-watch">To Watch</button>
+       </div>
+        <div>
+          <MovieList
+            //movies={this.state.movies} //might want to pass movieResults in here...
+            //movies={this.state.movieResults}
+            movies={this.display()}
+            watchedStatus={this.watchedStatus}
+
+           />
+        </div>
+      </div>
+    </div>
+  )}
+};
+//   render() {
+//     //making the style conditional on our state lets us update it based on user interactions
+//     // var style = {
+//     //   backgroundColor: this.state.watched ? 'green' : 'red'
+//     //   //change inner text?
+//     // };
+
+
+
+//     return(
+//     <div>
+//       <div className="header"></div>
+//       <div className="new-movie">
+//         <AddMovie handleInput={this.handleInput.bind(this)} handleMovieSubmit={this.handleMovieSubmit.bind(this)} />
+//       </div>
+//       <div className="search">
+//         {/* <Search handleSearch={this.handleSearch.bind(this)} handleSubmit={this.handleSubmit.bind(this)} /> */}
+//       </div>
+//       <div className="list">
+//         <div className="button-bar">
+//           <button className="watched">Watched</button>
+//           <button className="to-watch">To Watch</button>
+//        </div>
+//         <div>
+//           <MovieList
+//             movies={this.state.movies}
+//             search={this.state.searchPartial}
+//             watchToggle={this.watchToggle.bind(this)}
+//            />
+//         </div>
+//       </div>
+//     </div>
+//   )}
+// };
+
+export default App;
+
+
+
+
   //movieSearch
   // handleSearch(text) {
   //   console.log(text);
@@ -87,89 +186,3 @@ class App extends React.Component {
   //     })     //!this.state.watched,
   //   });
   // }
-  addMovie(movie) {
-    var newMovies = this.state.movies.slice(); //make a shallow copy of our movie array
-    newMovies.push(movie); //add returned movie from the AddMovie class
-    this.setState({
-      movies: newMovies, //this way we don't lose our original movie array when we add a movie
-    })
-  }
-  searchMovie(movieDisplay) {
-    //var displayMovies = this.state.movies.slice(); //make a shallow copy of our movie array
-    //do something
-    this.setState({
-      movieResults: movieDisplay,
-    })
-    console.log(movieDisplay);
-  }
-  //initializing the display before search...
-  display() {
-    if(this.state.movieResults.length === 0) {
-      return this.state.movies;
-    } else {
-      return this.state.movieResults;
-    }
-  }
-
-  render() {
-    return(
-    <div>
-      <div className="header"></div>
-      <div className="new-movie">
-        <AddMovie addMovie={this.addMovie} />
-      </div>
-      <div className="search">
-        <Search movies={this.state.movies} searchMovie={this.searchMovie}/>
-      </div>
-      <div className="list">
-        <div className="button-bar">
-          <button className="watched">Watched</button>
-          <button className="to-watch">To Watch</button>
-       </div>
-        <div>
-          <MovieList
-            //movies={this.state.movies} //might want to pass movieResults in here...
-            //movies={this.state.movieResults}
-            movies={this.display()}
-           />
-        </div>
-      </div>
-    </div>
-  )}
-};
-//   render() {
-//     //making the style conditional on our state lets us update it based on user interactions
-//     // var style = {
-//     //   backgroundColor: this.state.watched ? 'green' : 'red'
-//     //   //change inner text?
-//     // };
-
-
-
-//     return(
-//     <div>
-//       <div className="header"></div>
-//       <div className="new-movie">
-//         <AddMovie handleInput={this.handleInput.bind(this)} handleMovieSubmit={this.handleMovieSubmit.bind(this)} />
-//       </div>
-//       <div className="search">
-//         {/* <Search handleSearch={this.handleSearch.bind(this)} handleSubmit={this.handleSubmit.bind(this)} /> */}
-//       </div>
-//       <div className="list">
-//         <div className="button-bar">
-//           <button className="watched">Watched</button>
-//           <button className="to-watch">To Watch</button>
-//        </div>
-//         <div>
-//           <MovieList
-//             movies={this.state.movies}
-//             search={this.state.searchPartial}
-//             watchToggle={this.watchToggle.bind(this)}
-//            />
-//         </div>
-//       </div>
-//     </div>
-//   )}
-// };
-
-export default App;
