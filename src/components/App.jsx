@@ -20,6 +20,9 @@ class App extends React.Component {
     //bindings
     this.addMovie = this.addMovie.bind(this);
     this.searchMovie = this.searchMovie.bind(this);
+
+    //initialize
+    //this.searchMovie('');
   }
   //movieSearch
   // handleSearch(text) {
@@ -99,6 +102,14 @@ class App extends React.Component {
     })
     console.log(movieDisplay);
   }
+  //initializing the display before search...
+  display() {
+    if(this.state.movieResults.length === 0) {
+      return this.state.movies;
+    } else {
+      return this.state.movieResults;
+    }
+  }
 
   render() {
     return(
@@ -118,7 +129,8 @@ class App extends React.Component {
         <div>
           <MovieList
             //movies={this.state.movies} //might want to pass movieResults in here...
-            movies={this.state.movieResults}
+            //movies={this.state.movieResults}
+            movies={this.display()}
            />
         </div>
       </div>
