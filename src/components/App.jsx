@@ -19,7 +19,7 @@ class App extends React.Component {
     }
     //bindings
     this.addMovie = this.addMovie.bind(this);
-
+    this.searchMovie = this.searchMovie.bind(this);
   }
   //movieSearch
   // handleSearch(text) {
@@ -91,6 +91,14 @@ class App extends React.Component {
       movies: newMovies, //this way we don't lose our original movie array when we add a movie
     })
   }
+  searchMovie(movieDisplay) {
+    //var displayMovies = this.state.movies.slice(); //make a shallow copy of our movie array
+    //do something
+    this.setState({
+      movieResults: movieDisplay,
+    })
+    console.log(movieDisplay);
+  }
 
   render() {
     return(
@@ -100,7 +108,7 @@ class App extends React.Component {
         <AddMovie addMovie={this.addMovie} />
       </div>
       <div className="search">
-        {/* <Search handleSearch={this.handleSearch.bind(this)} handleSubmit={this.handleSubmit.bind(this)} /> */}
+        <Search movies={this.state.movies} searchMovie={this.searchMovie}/>
       </div>
       <div className="list">
         <div className="button-bar">
@@ -109,7 +117,8 @@ class App extends React.Component {
        </div>
         <div>
           <MovieList
-            movies={this.state.movies}
+            //movies={this.state.movies} //might want to pass movieResults in here...
+            movies={this.state.movieResults}
            />
         </div>
       </div>

@@ -46,10 +46,10 @@ class AddMovie extends React.Component {
     return (
       // handles a submit if enter is pressed on keyboard
       <form onSubmit={this.handleSubmit}>
-        <label> Add Movie...
+        <label>
           <input name="title" type="text" value={this.state.title} onChange={this.handleChange}></input>
         </label>
-        <button onClick={this.handleSubmit}>Submit</button>
+        <button onClick={this.handleSubmit}>Add Movie</button>
       </form>
     )
   }
